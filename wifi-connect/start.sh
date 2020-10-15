@@ -19,12 +19,12 @@ while [[ true ]]; do
   # iwgetid -r
 
   if [ $? -eq 0 ]; then
-      printf 'Skipping WiFi Connect\n'
+      printf 'WiFi is Connected, Skipping WiFi Connect Start\n'
   else
       printf 'Starting WiFi Connect\n'
       # Start wifi-connect with SSID "balenaMinecraftServer", Password "balenaMinecraftServer" and make it exit if no interaction happens within 10 minutes.
       ./wifi-connect -a 600 -s balenaMinecraftServer -p balenaMinecraftServer -o 80
   fi
   # wait 1 minute before checking again for internet connectivity
-  sleep 60
+  sleep ${WIFI_CONNECT_WAIT:-60}
 done
